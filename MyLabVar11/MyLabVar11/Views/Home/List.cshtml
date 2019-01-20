@@ -1,0 +1,69 @@
+﻿@using MyLabVar11.HtmlHelpers
+@model MyLabVar11.Models.FirmsListViewModel
+
+@{
+    Layout = null;
+}
+<link href="~/Scripts/normalize.css" rel="stylesheet" />
+<link href="~/Scripts/demo.css" rel="stylesheet" />
+<link href="~/Scripts/component.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+<link href="~/Content/Site.css" rel="stylesheet" />
+<style>
+    .header-rf {
+        height: 50px;
+        text-align: center;
+    }
+    .ww{
+        text-align: right;
+    }
+</style>
+
+<header>
+
+    <div class="header-rf">
+        @if (User.Identity.Name == "Rashad118")
+        {
+            @Html.ActionLink("Список пользователей", "Index", "Users")
+            @Html.ActionLink("Просмотреть отзывы", "Index", "Feedbacks")
+        }
+
+        @Html.ActionLink("Оставить отзыв", "Feedback", "Home")
+        <div class="ww"> @Html.ActionLink("Выйти", "LogOut", "Account")</div>
+    </div>
+    <div id="large-header" class="large-header">
+        <canvas id="demo-canvas"></canvas>
+    </div>
+</header>
+
+
+@{
+    ViewBag.Title = "Фирмы";
+}
+<body>
+    <div class="row panel">
+        <div id="types" class="col-xl-1">
+            @Html.Action("Menu", "Nav")
+        </div>
+        <div class="col-xl-11 alert-info">
+            <h2>Список фирм</h2>
+
+            <table class="table">
+                <tr class="table-bordered table-active"><th>Название фирмы</th><th>Тип фирмы</th><th>Описание рода деятельности</th></tr>
+                @foreach (var firm in Model.Firms)
+                {
+                    <tr class="table-bordered table-active"><td>@firm.NameF</td><td>@firm.TypeFirm</td><td><span class="lead"><a href="/Home/Description/@firm.Id">Описание</a></span></td></tr>
+                }
+            </table>
+            <div class="btn-group alert-dark">
+                @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x, type = Model.CurrentType }))
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="~/Scripts/TweenLite.min.js"></script>
+<script src="~/Scripts/EasePack.min.js"></script>
+<script src="~/Scripts/rAF.js"></script>
+<script src="~/Scripts/demo-1.js"></script>

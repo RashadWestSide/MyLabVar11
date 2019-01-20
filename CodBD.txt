@@ -1,0 +1,38 @@
+CREATE TABLE [dbo].[Firms] (
+    [Id]           INT            IDENTITY (1, 1) NOT NULL,
+    [NameF]        NVARCHAR (MAX) NOT NULL,
+    [TypeF]        NVARCHAR (50)  NULL,
+    [DescriptionF] NVARCHAR (50)  NULL,
+    CONSTRAINT [PK_dbo.Firms] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+
+CREATE TABLE [dbo].[Roles] (
+    [Id]   INT           IDENTITY (1, 1) NOT NULL,
+    [Name] NVARCHAR (50) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].[TypeFirms] (
+    [Id]       INT           IDENTITY (1, 1) NOT NULL,
+    [TypeName] NVARCHAR (50) NOT NULL,
+    [FirmId]   INT           NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].[Users] (
+    [Id]       INT           IDENTITY (1, 1) NOT NULL,
+    [Name]     NVARCHAR (50) NOT NULL,
+    [Password] NVARCHAR (50) NOT NULL,
+    [Age]      INT           NOT NULL,
+    [RoleId]   INT           NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_Users_Roles] FOREIGN KEY ([RoleId]) REFERENCES [dbo].[Roles] ([Id])
+);
+
+CREATE TABLE [dbo].[Descriptions] (
+    [Id]        INT NOT NULL IDENTITY,
+    [DescrText] NVARCHAR (MAX) NULL,
+    [FirmId]    INT            NOT NULL,
+    CONSTRAINT [FK_Descriptions_Firms] FOREIGN KEY ([FirmId]) REFERENCES [dbo].[Firms] ([Id])
+);

@@ -1,0 +1,28 @@
+﻿@model MyLabVar11.Models.Feedback
+
+@{
+    ViewBag.Title = "Feedback";
+}
+<div>
+    <h2>Форма для отправки фидбека</h2>
+    <form method="post">
+        <table>
+            <tr>
+                <td><p>Введите текст отзыва</p></td>
+                <td><input type="text" name="FeedText" /> </td>
+            </tr>
+            <tr>
+                <td><p>Введите имя</p></td>
+                <td><input type="text" name="Person" /> </td>
+            </tr>
+            <tr>
+                <td><p>Введите адрес :</p></td>
+                <td>
+                    <input type="email" name="Email" />
+                </td>
+            </tr>
+            <tr><td><input type="submit" value="Отправить" /> </td><td></td></tr>
+        </table>
+    </form>
+</div>
+

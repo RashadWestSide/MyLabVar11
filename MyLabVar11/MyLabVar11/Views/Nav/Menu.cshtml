@@ -1,0 +1,20 @@
+﻿@model  IEnumerable<string>
+@Html.ActionLink("Домой", "List", "Home", null, new { @class = "btn btn-success btn-lg" })
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+<link href="~/Content/Site.css" rel="stylesheet" />
+
+@foreach (var link in Model)
+{
+    @Html.RouteLink(link, new
+    {
+        controller = "Home",
+        action = "List",
+        type = link,
+        page = 1
+    }, new
+    {
+        @class = "btn btn-info btn-lg"
+            + (link == ViewBag.SelectedGenre ? "btn btn-success" : "")
+    })
+}
